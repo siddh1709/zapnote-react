@@ -31,7 +31,7 @@ A feature-rich note-taking application built with React that allows users to cre
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/zapnote-react.git
+git clone https://github.com/siddh1709/zapnote-react.git
 cd zapnote-react
 ```
 
