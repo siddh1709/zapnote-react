@@ -1,0 +1,280 @@
+/* Responsive Styles & Media Queries */
+
+/* Base Responsive Adjustments */
+@media (min-width: 768px) and (max-width: 1024px) 
+{
+  .container 
+  {
+    padding: 0 30px; 
+  }
+}
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) 
+{
+  .container 
+  {
+    padding: 0 15px;
+  }
+
+  .search-wrapper 
+  {
+    width: 90%;
+    align-items: center;
+  }
+
+  #searchInput 
+  {
+    width: 80vw;
+  }
+
+  .note-cell 
+  {
+    width: 90vw;
+    margin: 10px auto;
+  }
+
+  .popup-box 
+  {
+    max-height: 95vh;
+    width: 95vw;
+    padding: 12px;
+  }
+
+  .popup-video-grid,
+  .media-grid 
+  {
+    grid-template-columns: 1fr !important;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+
+  .popup-video-grid > *,
+  .media-grid > * 
+  {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+  }
+
+  /* Media sizing on mobile */
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .note-media-grid img,
+  .note-media-grid video,
+  .note-audio-item,
+  .media-grid img,
+  .media-grid video 
+  {
+    height: 180px;
+    min-width: 85vw;
+  }
+
+  .note-media-grid 
+  {
+    grid-template-columns: 1fr;
+  }
+
+  .note-media-grid .note-audio-item,
+  .note-media-grid img,
+  .note-media-grid video 
+  {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  /* Remove buttons on mobile */
+  .remove-video-icon,
+  .remove-media-icon,
+  .media-delete-btn 
+  {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+    top: 6px !important;
+    right: 6px !important;
+    font-size: 16px !important;
+    z-index: 30;
+    border-width: 2px !important;
+  }
+  
+  .audio-item .remove-video-icon 
+  {
+    top: 6px !important;
+    right: 6px !important;
+    z-index: 35 !important;
+  }
+
+  /* Show thin scrollbar on mobile for better UX */
+  .note-media-scroll::-webkit-scrollbar,
+  .media-grid::-webkit-scrollbar,
+  .note-audio-section::-webkit-scrollbar 
+  {
+    height: 4px;
+    display: block;
+  }
+  
+  .note-media-scroll::-webkit-scrollbar-thumb,
+  .media-grid::-webkit-scrollbar-thumb,
+  .note-audio-section::-webkit-scrollbar-thumb 
+  {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Fix mobile spacing issues */
+  .note-click-area 
+  {
+    padding: 0 8px 80px 8px;
+  }
+
+  .note-media-scroll,
+  .note-media-grid,
+  .media-grid,
+  .note-audio-section 
+  {
+    padding-bottom: 25px;
+    margin-bottom: 35px;
+  }
+
+  .note-tags-wrapper 
+  {
+    bottom: 30px;
+  }
+
+  .note-actions-container 
+  {
+    bottom: 15px;
+  }
+
+  /* Fix 2-item scrolling issue */
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .media-grid img,
+  .media-grid video,
+  .note-audio-item 
+  {
+    min-width: 90vw;
+    flex-shrink: 0;
+  }
+
+  .note-media-scroll,
+  .media-grid,
+  .note-audio-section 
+  {
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Tablets (601px–1023px) */
+@media (min-width: 601px) and (max-width: 1023px) 
+{
+  .container 
+  {
+    padding: 0 25px;
+  }
+}
+
+/* Mobile and tablet adjustments */
+@media (max-width: 768px) 
+{
+  .popup-box 
+  {
+    max-height: 95vh;
+    width: 95vw;
+    padding: 12px;
+  }
+
+  .note-cell 
+  {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 200px;
+  }
+
+  .note-click-area 
+  {
+    flex-grow: 1;
+    height: auto;
+  }
+
+  .note-media-scroll 
+  {
+    max-height: none;
+  }
+
+  .note-media 
+  {
+    max-height: 40vh;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+  }
+
+  video.note-media 
+  {
+    max-height: 40vh;
+    height: auto;
+  }
+
+  .note-tags-wrapper,
+  .note-actions-container 
+  {
+    margin-top: 16px;
+  }
+
+  .note-media-scroll 
+  {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .note-tags-wrapper,
+  .note-actions-container 
+  {
+    margin-top: 4px !important;
+  }
+
+  /* Force consistent sizing for ALL media types */
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .note-media-scroll .note-audio-item 
+  {
+    width: 100% !important;
+    height: 210px !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide scrollbar when there's only one item */
+  .note-media-scroll:has(> *:only-child) 
+  {
+    overflow-x: hidden !important;
+  }
+
+  /* Fallback for browsers without :has() support */
+  .note-media-scroll.single-media-item 
+  {
+    overflow-x: hidden !important;
+  }
+}
+
+/* Larger screens (1024px and up) */
+@media (min-width: 1024px) 
+{
+  .container 
+  {
+    padding: 0 40px;
+  }
+}

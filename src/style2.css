@@ -1,0 +1,1494 @@
+body, html, #root 
+{
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  position: relative;
+}
+
+body 
+{
+  background-color: rgb(36, 36, 36);
+  margin: 0;
+  font-family: 'Inter', Verdana, sans-serif;
+}
+
+.top-bar 
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Center the header text */
+.app-header 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent !important; 
+  padding: 0 !important;                   
+  margin: 0;
+  border: none;
+}
+
+
+.app-header h1 
+{
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  pointer-events: auto;
+}
+
+.container 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #242424;
+  padding: 0 10px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  overflow: visible;
+  padding-top: 120px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) 
+{
+  .container 
+  {
+    padding: 0 30px; 
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* Mobile (up to 600px) */
+@media (max-width: 600px) 
+{
+  .container 
+  {
+    padding: 0 15px;
+  }
+}
+
+/* Tablets (601px–1023px) */
+@media (min-width: 601px) and (max-width: 1023px) 
+{
+  .container 
+  {
+    padding: 0 25px;
+  }
+}
+
+/* Larger screens (1024px and up) */
+@media (min-width: 1024px) 
+{
+  .container 
+  {
+    padding: 0 40px;
+  }
+}
+
+#notesGrid,
+#pinnedGrid,
+#archiveGrid 
+{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 24px;
+  width: 100%;
+  padding: 0 0 30px 0;
+}
+
+.note-cell 
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 275px;
+  position: relative;
+  background: white;
+  border-radius: 8px;
+  overflow: visible;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.note-cell.note:hover 
+{
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.note-cell.note 
+{
+  cursor: pointer;
+  background-color: #363636;
+}
+
+.note-cell:not(.note) 
+{
+  background-color: #363636;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-cell.pinned 
+{
+  border: 2.5px solid rgb(239, 239, 239);
+}
+
+.note-cell.archived 
+{
+  background-color: #363636;
+  opacity: 1;
+  border-left: 0px solid #505050;
+}
+
+@media (max-width: 600px) 
+{
+  .note-cell 
+  {
+    width: 90vw;
+    margin: 10px auto;
+  }
+}
+
+.note-click-area 
+{
+  position: relative;
+  height: 100%;
+  padding: 0 8px 36px 8px; 
+}
+
+.note-content 
+{
+  overflow: visible;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+  white-space: pre-line;
+  word-break: break-word;
+  background-color: inherit;
+  color: #ffffff;
+  padding: 15px;
+  margin-bottom: -18px;
+}
+
+.note-tags 
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag 
+{
+  background-color: #444;
+  color: #eee;
+  font-weight: 500;
+  border-radius: 16px;
+  padding: 4px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tag:hover 
+{
+  background: #707070;
+}
+
+.tag-filter-banner 
+{
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #494949;
+  border-left: 4px solid #888;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.tag-filter-banner button 
+{
+  background: #222;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tag-filter-banner button:hover 
+{
+  background: #333;
+}
+
+.note-actions-container 
+{
+  bottom: 0px;
+  right: 8px;
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+  background: transparent;
+  pointer-events: none;
+  margin-top: 12px;
+  position: absolute;
+}
+
+.note-actions-container > * 
+{
+  pointer-events: auto;
+}
+
+.note-actions 
+{
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 10px;
+  background: inherit;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.note-actions i 
+{
+  padding: 6px;
+  border-radius: 6px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: #dddddd;
+}
+
+.note-actions i:hover 
+{
+  background-color: #444444;
+  color: #ffffff;
+}
+
+.add-btn 
+{
+  width: 60px;
+  height: 60px;
+  background-color: #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  margin: auto; 
+}
+
+.plus-icon 
+{
+  color: #ccc;
+  font-size: 30px;
+  transition: transform 0.2s ease;
+}
+
+.add-btn:hover 
+{
+  transform: scale(1.3);
+}
+
+.add-btn:hover .plus-icon 
+{
+  transform: scale(1.3);
+}
+
+.note-cell.add-note 
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-wrapper 
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 110px;
+}
+
+#searchInput 
+{
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) 
+{
+  .search-wrapper 
+  {
+    width: 90%;
+    align-items: center;
+  }
+
+  #searchInput 
+  {
+    width: 80vw;
+  }
+}
+
+.clear-icon 
+{
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.clear-icon:hover 
+{
+  opacity: 1;
+  color: #979797bd;
+}
+
+.popup-overlay 
+{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#popupOverlay.show 
+{
+  display: flex;
+}
+
+.popup-box 
+{
+  background: #272727;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+}
+
+@media (max-width: 768px) 
+{
+  .popup-box 
+  {
+    max-height: 95vh;
+    width: 95vw;
+    padding: 12px;
+  }
+}
+
+.popup-content-scrollable 
+{
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-content 
+{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.popup-video 
+{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;       
+  border-radius: 8px;
+  background-color: #000;
+}
+
+
+.media-grid img 
+{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.popup-video-grid,
+.media-grid 
+{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48%, 1fr));
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 600px) 
+{
+  .popup-video-grid,
+  .media-grid 
+  {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) 
+{
+  .popup-video-grid,
+  .media-grid 
+  {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+
+  .popup-video-grid > *,
+  .media-grid > * 
+  {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+  }
+}
+
+
+#popupInnerBox 
+{
+  background-color: #1f1f1f; 
+  padding: 20px;
+  border-radius: 6px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.popup-textarea 
+{
+  background-color: #1e1e1e;
+  color: #ffffff;
+  font-family: 'Inter', Verdana, sans-serif;
+  white-space: pre-line;
+  word-break: break-word;
+  padding: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: 8px;
+  resize: none;
+}
+
+.popup-textarea.large 
+{
+  height: 250px;
+}
+
+.popup-textarea.small 
+{
+  height: 150px;
+  margin-top: 10px;
+}
+
+.popup-buttons 
+{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -20px;
+  margin-bottom: 0;
+}
+
+.popup-buttons button 
+{
+  background-color: #444;
+  color: #eee;
+  border: none;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.popup-buttons button:hover 
+{
+  background-color: #686868;
+}
+
+.section-heading 
+{
+  max-width: 1200px;
+  width: 100%;
+  margin: 30px auto 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #fffffd;
+}
+
+#confirmOverlay 
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+#confirmOverlay.show 
+{
+  display: flex;
+}
+
+#confirmOverlay .popup-box 
+{
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #eee;
+}
+
+#confirmOverlay .popup-buttons 
+{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+#tagInputContainer 
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  margin-top: 0;
+}
+
+#tagList 
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chip 
+{
+  background: #3b3b3b;
+  color: #eee;
+  border-radius: 12px;
+  padding: 4px 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.tag-chip .remove-tag 
+{
+  margin-left: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.tag-chip .remove-tag:hover 
+{
+  color: #fff;
+}
+
+.app-header 
+{
+  background-color: #1f1f1f;
+  padding: 16px 0;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.app-header h1 
+{
+  margin: 0;
+  color: #f1f1f1;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.app-footer 
+{
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+.note-tags-wrapper {
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+  position: absolute;
+}
+
+.note-tags .tag 
+{
+  background-color: #444;
+  color: #eee;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+}
+
+#tagInputField 
+{
+  flex-grow: 1;
+  min-width: 150px;
+  background-color: #1f1f1f;
+  color: #eee;
+  border: none;
+  outline: none;
+}
+
+.confirm-popup 
+{
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #eee;
+  display: block; 
+}
+
+.search-inner 
+{
+  width: 100%;
+  position:relative;
+}
+
+.menu-toggle-icon 
+{
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.nav-bar 
+{
+  position: fixed;
+  top: 55px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #2e2e2e;
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.nav-bar button 
+{
+  background: none;
+  border: 1px solid #888;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-bar button:hover 
+{
+  background-color: #444;
+}
+
+.video-upload-label 
+{
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #444;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.video-upload-label:hover 
+{
+  background-color: #666;
+}
+
+.note-video-wrapper 
+{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px;
+  z-index: 1;
+  position: relative;
+}
+
+.video-wrapper 
+{
+  position: relative;
+  margin-top: 10px;
+}
+
+.remove-video-btn 
+{
+  margin-top: 10px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.remove-video-btn:hover 
+{
+  background-color: #666;
+}
+
+.popup-video-wrapper 
+{
+  position: relative;
+}
+
+.image-grid 
+{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.image-cell img 
+{
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.fullscreen 
+{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.9);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 999;
+}
+
+.fullscreen img 
+{
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Unified media sizing for all images and videos */
+/* ADD THIS ENTIRE SECTION TO YOUR CSS: */
+
+/* Base media container styles */
+.note-media-scroll,
+.note-media-grid,
+.note-audio-section 
+{
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding-bottom: 8px;
+  margin-top: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.note-media-grid 
+{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  overflow-x: visible; /* Grid doesn't need horizontal scroll */
+  scroll-snap-type: none;
+}
+
+/* UNIFIED SIZING FOR ALL MEDIA TYPES */
+.note-media-scroll img,
+.note-media-scroll video,
+.note-media-grid img,
+.note-media-grid video,
+.media-grid img,
+.media-grid video,
+.note-audio-item 
+{
+  width: 100%;
+  height: 170px; /* Same height for ALL media */
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  min-width: 200px; /* Consistent minimum width */
+  flex-shrink: 0;
+}
+
+/* Audio-specific styling while maintaining size consistency */
+.note-audio-item 
+{
+  background: #2b2b2b;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Height and width inherited from above rule */
+}
+
+.note-audio-title 
+{
+  color: #ddd;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* Media containers */
+.media-container,
+.media-cell 
+{
+  position: relative;
+  flex-shrink: 0;
+}
+
+.media-cell 
+{
+  min-width: 200px;
+}
+
+/* Grid layout specific adjustments */
+.note-media-grid .note-audio-item,
+.note-media-grid img,
+.note-media-grid video 
+{
+  min-width: auto; /* Allow grid to control width */
+  width: 100%;
+}
+
+/* Mobile responsiveness - keep sizes consistent */
+@media (max-width: 600px) 
+{
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .note-media-grid img,
+  .note-media-grid video,
+  .note-audio-item,
+  .media-grid img,
+  .media-grid video 
+  {
+    height: 180px; /* Slightly larger on mobile for better visibility */
+    min-width: 85vw; /* Consistent mobile width */
+  }
+
+  .note-media-grid 
+  {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+
+  .note-media-grid .note-audio-item,
+  .note-media-grid img,
+  .note-media-grid video 
+  {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+.media-container 
+{
+  position: relative;
+}
+
+/* FIND AND REPLACE these sections: */
+
+/* 1. Replace ALL the remove/delete button styles with this unified version: */
+
+.remove-video-icon,
+.remove-media-icon,
+.media-delete-btn 
+{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  
+  /* FORCE perfect square dimensions */
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 26px !important;
+  min-height: 26px !important;
+  max-width: 26px !important;
+  max-height: 26px !important;
+  
+  /* Perfect circle */
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+  
+  /* Remove any padding that might distort the circle */
+  padding: 0 !important;
+  margin: 0 !important;
+  
+  /* Background and colors */
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  
+  /* Perfect centering */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  /* Typography */
+  font-size: 14px !important;
+  font-weight: bold !important;
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  
+  /* Remove any box-sizing issues */
+  box-sizing: border-box !important;
+  
+  /* Interaction */
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  
+  /* Remove default button styling */
+  outline: none;
+  text-decoration: none;
+  border-style: solid;
+  
+  /* Ensure it's clickable */
+  pointer-events: auto;
+  
+  /* Center the text */
+  text-align: center;
+  vertical-align: middle;
+}
+
+.remove-video-icon:hover,
+.remove-media-icon:hover,
+.media-delete-btn:hover 
+{
+  transform: scale(1.15) !important;
+  border-color: white !important;
+}
+
+/* AUDIO ITEM SPECIFIC POSITIONING - Fix the audio delete button position */
+.audio-item 
+{
+  position: relative !important; /* Ensure audio-item is positioned */
+}
+
+.audio-item .remove-video-icon 
+{
+  /* Override positioning for audio items specifically */
+  position: absolute !important;
+  top: 2px !important;
+  right: 8px !important;
+  z-index: 25 !important;
+}
+
+/* Mobile specific */
+@media (max-width: 600px) 
+{
+  .remove-video-icon,
+  .remove-media-icon,
+  .media-delete-btn 
+  {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
+    top: 6px !important;
+    right: 6px !important;
+    font-size: 16px !important;
+    z-index: 30;
+    border-width: 2px !important;
+  }
+  
+  .audio-item .remove-video-icon 
+  {
+    top: 6px !important;
+    right: 6px !important;
+    z-index: 35 !important;
+  }
+}
+
+
+.video-upload-section 
+{
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.video-upload-label 
+{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  border: none;
+  text-decoration: none;
+}
+
+.video-upload-label:hover 
+{
+  background-color: #666;
+}
+
+.video-upload-label i 
+{
+  font-size: 16px;
+}
+
+.audio-wrapper 
+{
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100vw;
+  padding: 0 8px;
+
+}
+
+.audio-list 
+{
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  position: relative;
+  gap: 36px;
+}
+
+
+.audio-item:last-child 
+{
+  margin-right: 0;
+}
+
+.waveform-wrapper 
+{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.waveform 
+{
+  width: 200px;
+}
+
+.waveform-play-button 
+{
+  padding: 4px 8px;
+  border: none;
+  background: #2196f3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top:-8px !important;
+}
+
+
+.audio-recording-row 
+{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recording-status 
+{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  color: red;
+}
+
+.recording-dot 
+{
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink 
+{
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.upload-audio-label 
+{
+  background-color: #444;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upload-audio-label:hover 
+{
+  background-color: #666;
+}
+
+.audio-title-input 
+{
+  width: 70%;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #ddd;
+}
+
+.audio-title-input::placeholder 
+{
+  color: #888;
+}
+
+.note-audio-section 
+{
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-top: 10px;
+  padding-bottom: 8px;
+}
+
+
+.note-audio-title 
+{
+  color: #ddd;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+
+.popup-header 
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.popup-controls 
+{
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: none;
+}
+
+.popup-pin-btn,
+.popup-close-btn 
+{
+  pointer-events: auto;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  background-color: #2c2c2c;
+  border-radius: 6px;
+  color: #eee;
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.popup-pin-btn:hover,
+.popup-close-btn:hover 
+{
+  background-color: #444;
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Sleek mobile-style scrollbars for media containers */
+.note-media-scroll::-webkit-scrollbar,
+.media-grid::-webkit-scrollbar,
+.note-audio-section::-webkit-scrollbar {
+  height: 3px; /* Much thinner - mobile-like */
+}
+
+.note-media-scroll::-webkit-scrollbar-track,
+.media-grid::-webkit-scrollbar-track,
+.note-audio-section::-webkit-scrollbar-track {
+  background: transparent; /* Invisible track like mobile */
+  border-radius: 0;
+}
+
+.note-media-scroll::-webkit-scrollbar-thumb,
+.media-grid::-webkit-scrollbar-thumb,
+.note-audio-section::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4); /* Subtle, thin thumb */
+  border-radius: 2px; /* Slightly rounded */
+  border: none;
+}
+
+.note-media-scroll::-webkit-scrollbar-thumb:hover,
+.media-grid::-webkit-scrollbar-thumb:hover,
+.note-audio-section::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6); /* Slightly more visible on hover */
+}
+
+
+@media (max-width: 600px) 
+{
+  /* Show thin scrollbar on mobile for better UX */
+  .note-media-scroll::-webkit-scrollbar,
+  .media-grid::-webkit-scrollbar,
+  .note-audio-section::-webkit-scrollbar 
+  {
+    height: 4px; /* Slightly thicker on mobile for touch */
+    display: block; /* Keep visible on mobile */
+  }
+  
+  .note-media-scroll::-webkit-scrollbar-thumb,
+  .media-grid::-webkit-scrollbar-thumb,
+  .note-audio-section::-webkit-scrollbar-thumb 
+  {
+    background: rgba(255, 255, 255, 0.6); /* More visible on mobile */
+  }
+
+  /* Fix mobile spacing issues */
+  .note-click-area 
+  {
+    padding: 0 8px 80px 8px; /* More bottom padding on mobile */
+  }
+
+  .note-media-scroll,
+  .note-media-grid,
+  .media-grid,
+  .note-audio-section 
+  {
+    padding-bottom: 25px; /* More space for scrollbar */
+    margin-bottom: 35px; /* More separation from bottom elements */
+  }
+
+  .note-tags-wrapper 
+  {
+    bottom: 30px; /* Move tags higher up on mobile */
+  }
+
+  .note-actions-container 
+  {
+    bottom: 15px; /* Move action buttons higher up on mobile */
+  }
+
+  /* Fix 2-item scrolling issue */
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .media-grid img,
+  .media-grid video,
+  .note-audio-item 
+  {
+    min-width: 90vw; /* Ensure items are wide enough to trigger scroll */
+    flex-shrink: 0; /* Prevent shrinking */
+  }
+
+  .note-media-scroll,
+  .media-grid,
+  .note-audio-section 
+  {
+    overflow-x: scroll; /* Force scrolling */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+  }
+}
+
+
+@media (max-width: 768px) 
+{
+  .note-cell 
+  {
+    display: flex;
+    flex-direction: column;
+    height: auto;              /* allow growth */
+    min-height: 200px;         /* add a base if needed */
+  }
+
+  .note-click-area 
+  {
+    flex-grow: 1;
+    height: auto;
+  }
+
+  .note-media-scroll 
+  {
+    max-height: none;          /* no cap on scroll container height */
+  }
+
+  .note-media 
+  {
+    max-height: 40vh;          /* scale media properly */
+    height: auto;
+    width: auto;
+    object-fit: contain;
+  }
+
+  video.note-media 
+  {
+    max-height: 40vh;
+    height: auto;
+  }
+
+  .note-tags-wrapper,
+  .note-actions-container 
+  {
+    margin-top: 16px;          /* push tags and actions lower */
+  }
+
+  .note-media-scroll 
+  {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+.note-tags-wrapper,
+.note-actions-container 
+{
+  margin-top: 4px !important;
+}
+}
+
+/* Simple fix: Make all media the same size on mobile */
+
+@media (max-width: 768px) 
+{
+  /* Force consistent sizing for ALL media types */
+  .note-media-scroll img,
+  .note-media-scroll video,
+  .note-media-scroll .note-audio-item 
+  {
+    width: 100% !important;
+    height: 210px !important; /* Same height for all */
+    min-width: 100% !important; /* Fill container width */
+    max-width: 100% !important;
+    object-fit: contain !important; /* Consistent cropping */
+    flex-shrink: 0 !important;
+  }
+
+  /* Hide scrollbar when there's only one item */
+  .note-media-scroll:has(> *:only-child) 
+  {
+    overflow-x: hidden !important;
+  }
+
+  /* Fallback for browsers without :has() support */
+  .note-media-scroll.single-media-item 
+  {
+    overflow-x: hidden !important;
+  }
+}
